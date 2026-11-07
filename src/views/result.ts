@@ -9,10 +9,17 @@ const pesos: Record<string, number> = menuData.pesos
 type Score = { restaurant: Restaurant; score: number }
 
 const links: Record<Restaurant, string> = {
-    'Local de Ensayo': "https://localdensayo.com/carta/#",
+    'Local de Ensayo': "https://localdensayo.com/carta/#", 
     'Alborada': "https://alboradarestaurante.com/index.php/carta",
     'Torombolo': "https://restaurantetorombolo.com/murcia/",
     'Bodguita': "https://www.bodeguitamurcia.com/menus/",
+}
+
+const images: Record<Restaurant, string> = {
+    'Local de Ensayo': "/localdeensayo.jpg",
+    'Alborada': "/alborada.jpg",
+    'Torombolo': "/torombolo.jpg",
+    'Bodguita': "/bodeguita.jpg",
 }
 
 function getScores(selectedAnswers: Restaurant[]): Score[] {
@@ -131,6 +138,14 @@ export const renderResult = (
     <section class="screen screen-result">
       <h2 class="result-title">¡FELICIDADES!</h2>
       <p class="description">Según tu elección, el restaurante ideal para tu cumpleaños es:</p>
+
+      ${winner ? `
+        <img
+          class="winner-image"
+          src="${images[winner.restaurant]}"
+          alt="${winner.restaurant}"
+        />
+      ` : ''}
 
       <div class="chart">
         ${scores
