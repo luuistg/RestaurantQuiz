@@ -17,9 +17,11 @@ const app = document.querySelector<HTMLDivElement>('#app')!
 
 let questionIndex = 0
 
-const selectedAnswers: (Restaurant | undefined)[] = []
+const selectedAnswers: (Restaurant | undefined)[] = new Array(rounds.length).fill(undefined)
 
 function showQuestion() {
+  const allAnswered = selectedAnswers.every(isDefined)
+
   renderQuiz(
     app,
     questionIndex,
@@ -34,11 +36,11 @@ function showQuestion() {
       goToQuestion(questionIndex + 1)
     },
     () => {
-        const allAnswered = selectedAnswers.every(isDefined)
         if (allAnswered) {
           goToResult()
         }
-    }
+    },
+    !allAnswered
   )
 }
 
@@ -73,6 +75,9 @@ function getAnsweredRestaurants(): Restaurant[] {
 }
 
 function goToResult() {
+  if (!selectedAnswers.every(isDefined)) {
+    return
+  }
   renderResult(app, getAnsweredRestaurants(), () => {
     questionIndex = 0
     clearQuestion()

@@ -10,7 +10,7 @@
   --gold: #efb11d;
   --cream: #ebe9e1;
   --ink: #120703;
-  --green: #3d6b35;
+  --grey: #a8a8a8;
 
   /* Tema claro */
   --text: #7a4a44;
@@ -493,4 +493,60 @@ body {
   .stagger-enter {
     animation: none;
   }
+}
+
+.disabled {
+  pointer-events: none;
+  color: var(--ink);
+  background-color: var(--grey);
+  border-color: var(--ink);
+  box-shadow: var(--ink) 8px 8px 0;
+  &:hover {
+    transform: none;
+    background: var(--grey);
+    color: var(--ink);
+  }
+}
+
+.btn-end-wrapper {
+  position: relative;
+}
+
+/* :not(.hidden) en vez de "display: inline-block" suelto, para que no
+   importe el orden frente a la regla .hidden (misma especificidad). */
+.btn-end-wrapper:not(.hidden) {
+  display: inline-block;
+}
+
+.btn-end-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  padding: 8px 12px;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+/* El botón deshabilitado tiene pointer-events:none, así que el :hover que
+   dispara el tooltip se detecta en este wrapper (que sí recibe el cursor),
+   no en el propio botón. */
+.btn-end-wrapper.btn-end-wrapper--disabled:hover .btn-end-tooltip {
+  opacity: 1;
+}
+
+.btn-end-wrapper.btn-end-wrapper--disabled .btn-end {
+  transform: none;
 }

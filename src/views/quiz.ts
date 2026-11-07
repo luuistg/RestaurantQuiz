@@ -17,7 +17,8 @@ export function renderQuiz(
   onAnswer: (restaurant: Restaurant) => void,
   onBack: () => void,
   onNext: () => void,
-  onEnd: () => void
+  onEnd: () => void,
+  disableEnd: boolean
 ) {
   root.innerHTML = `
     <section class="screen screen-quiz">
@@ -32,7 +33,10 @@ export function renderQuiz(
             <div class="quiz-navigation">
                 <button class="btn btn-back" id="btn-back">${ChevronLeft}</button>
                 <button class="btn btn-next" id="btn-next">${ChevronRight}</button>
-                <button class="btn btn-end hidden" id="btn-end">Confirmar</button>
+                <div class="btn-end-wrapper hidden" id="btn-end-wrapper">
+                    <button class="btn btn-end" id="btn-end">Confirmar</button>
+                    <span class="btn-end-tooltip">Faltan preguntas por responder</span>
+                </div>
             </div>
         </div>
         <h2 class="quiz-title">Pregunta ${questionIndex + 1}</h2>
@@ -82,6 +86,7 @@ export function renderQuiz(
 
   const btnBack = root.querySelector<HTMLButtonElement>('#btn-back')!
   const btnNext = root.querySelector<HTMLButtonElement>('#btn-next')!
+  const btnEndWrapper = root.querySelector<HTMLDivElement>('#btn-end-wrapper')!
   const btnEnd = root.querySelector<HTMLButtonElement>('#btn-end')!
 
   btnBack.addEventListener('click', onBack)
@@ -96,10 +101,21 @@ export function renderQuiz(
 
   if (questionIndex === rounds.length - 1) {
     btnNext.classList.add('hidden')
-    btnEnd.classList.remove('hidden')
+    btnEndWrapper.classList.remove('hidden')
   } else {
     btnNext.classList.remove('hidden')
-    btnEnd.classList.add('hidden')
+    btnEndWrapper.classList.add('hidden')
+  }
+
+  // El botón se pone pointer-events:none cuando está deshabilitado, así que
+  // el hover para el tooltip se detecta en el wrapper (que sí sigue
+  // recibiendo eventos), no en el propio botón.
+  if (disableEnd) {
+    btnEnd.classList.add('disabled')
+    btnEndWrapper.classList.add('btn-end-wrapper--disabled')
+  } else {
+    btnEnd.classList.remove('disabled')
+    btnEndWrapper.classList.remove('btn-end-wrapper--disabled')
   }
 
   root.querySelectorAll<HTMLButtonElement>('.answer').forEach((button) => {
