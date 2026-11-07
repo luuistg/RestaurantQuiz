@@ -1,0 +1,40 @@
+{
+  "pesos": {
+    "Snack1": 1,
+    "Snack2": 1,    
+    "Entrante": 3,
+    "Principal": 4,
+    "Postre": 2
+
+  },
+  "restaurantes": {
+    "Local de Ensayo": {
+      "Snack1": "Marinera tradicional con pan de masa madre, huevas de trucha y anchoa",
+      "Snack2": "Croqueta de jamón de bellota y leche fresca con velo de papada de bellota",
+      "Entrante": "Tortilla vaga de cocochas y piparras",
+      "Principal": "Solomillo de vaca madurada, foie ecológico jugo de ternera y verduras",
+      "Postre": "Buñuelos de chocolate y helado de vainilla"
+    },
+    "Alborada": {
+      "Snack1": "Alcachofa al josper con foie y trufa",
+      "Snack2": "Croqueta cremosa de jamón",
+      "Entrante": "Tomate partido con bonito y ventresca",
+      "Principal": "Entrecot de ternera nacional",
+      "Postre": "Tarta de queso al horno"
+    },
+    "Torombolo": {
+      "Snack1": "Marinera Torombolo",
+      "Snack2": "Brioche de Carrillera",
+      "Entrante": "Calamar Nacional/ Pata de Pulpo",
+      "Principal": "Ojo de bife Argentino",
+      "Postre": "Coulant de Chocolate con helado de mango Pasión"
+    },
+    "Bodguita": {
+      "Snack1": "Alcachofa Parrilla con Chato Murciano guisado con vino",
+      "Snack2": "Croquetas caseras de Jamón",
+      "Entrante": "Almejas al Ajillo con piñones",
+      "Principal": "Solomillo de Vacuno con su guarnición",
+      "Postre": "Tarta de Chocolate caliente con helado artesano"
+    }
+  }
+}
