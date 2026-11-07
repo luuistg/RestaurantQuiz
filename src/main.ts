@@ -9,7 +9,7 @@ import '@fontsource/ibm-plex-mono/600.css'
 // src/main.ts
 import './style.css'
 import { renderLanding } from './views/landing'
-import { renderQuiz, rounds, animateQuizExit } from './views/quiz'
+import { renderQuiz, rounds, animateQuizExit, updateConfirmState } from './views/quiz'
 import { renderResult } from './views/result'
 import { type Restaurant } from './models/types'
 
@@ -28,6 +28,7 @@ function showQuestion() {
     selectedAnswers[questionIndex],
     (selectedRestaurant) => {
       selectedAnswers[questionIndex] = selectedRestaurant
+      updateConfirmState(app, !selectedAnswers.every(isDefined))
     },
     () => {
       goToQuestion(questionIndex - 1)
@@ -36,7 +37,7 @@ function showQuestion() {
       goToQuestion(questionIndex + 1)
     },
     () => {
-        if (allAnswered) {
+        if (selectedAnswers.every(isDefined)) {
           goToResult()
         }
     },

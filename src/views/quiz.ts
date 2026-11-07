@@ -107,16 +107,7 @@ export function renderQuiz(
     btnEndWrapper.classList.add('hidden')
   }
 
-  // El botón se pone pointer-events:none cuando está deshabilitado, así que
-  // el hover para el tooltip se detecta en el wrapper (que sí sigue
-  // recibiendo eventos), no en el propio botón.
-  if (disableEnd) {
-    btnEnd.classList.add('disabled')
-    btnEndWrapper.classList.add('btn-end-wrapper--disabled')
-  } else {
-    btnEnd.classList.remove('disabled')
-    btnEndWrapper.classList.remove('btn-end-wrapper--disabled')
-  }
+  updateConfirmState(root, disableEnd)
 
   root.querySelectorAll<HTMLButtonElement>('.answer').forEach((button) => {
     button.addEventListener('click', () => {
@@ -141,6 +132,29 @@ export function renderQuiz(
     item.style.animationDelay = `${ENTER_BASE_DELAY_MS + index * ENTER_STAGGER_MS}ms`
     item.classList.add('stagger-enter')
   })
+}
+
+// Activa/desactiva visualmente el botón "Confirmar" sin volver a
+// renderizar toda la pregunta (así no se repite la animación de entrada
+// cada vez que se elige una respuesta). El botón se pone
+// pointer-events:none cuando está deshabilitado, así que el hover para el
+// tooltip se detecta en el wrapper (que sí sigue recibiendo eventos), no
+// en el propio botón.
+export function updateConfirmState(root: HTMLElement, disableEnd: boolean): void {
+  const btnEnd = root.querySelector<HTMLButtonElement>('#btn-end')
+  const btnEndWrapper = root.querySelector<HTMLDivElement>('#btn-end-wrapper')
+
+  if (!btnEnd || !btnEndWrapper) {
+    return
+  }
+
+  if (disableEnd) {
+    btnEnd.classList.add('disabled')
+    btnEndWrapper.classList.add('btn-end-wrapper--disabled')
+  } else {
+    btnEnd.classList.remove('disabled')
+    btnEndWrapper.classList.remove('btn-end-wrapper--disabled')
+  }
 }
 
 // Clona SOLO cada botón de respuesta (no toda la tarjeta) y lo deja
