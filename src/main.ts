@@ -9,7 +9,7 @@ import '@fontsource/ibm-plex-mono/600.css'
 // src/main.ts
 import './style.css'
 import { renderLanding } from './views/landing'
-import { renderQuiz, rounds } from './views/quiz'
+import { renderQuiz, rounds, animateQuizExit } from './views/quiz'
 import { renderResult } from './views/result'
 import { type Restaurant } from './models/types'
 
@@ -54,6 +54,7 @@ function goToQuestion(index: number) {
     return
   }
 
+  animateQuizExit(app)
   questionIndex = index
   showQuestion()
 }

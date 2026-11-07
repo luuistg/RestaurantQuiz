@@ -465,3 +465,32 @@ body {
   stroke-width: 3;
   flex-shrink: 0;
 }
+
+@keyframes stagger-slide-out {
+  to {
+    transform: translateX(-60px);
+    opacity: 0;
+  }
+}
+
+@keyframes stagger-slide-in {
+  from {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+}
+
+.stagger-exit {
+  animation: stagger-slide-out 320ms ease forwards;
+}
+
+.stagger-enter {
+  animation: stagger-slide-in 340ms ease backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-exit,
+  .stagger-enter {
+    animation: none;
+  }
+}
