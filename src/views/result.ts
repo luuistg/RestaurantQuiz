@@ -16,10 +16,10 @@ const links: Record<Restaurant, string> = {
 }
 
 const images: Record<Restaurant, string> = {
-    'Local de Ensayo': "/localdeensayo.jpg",
-    'Alborada': "/alborada.jpg",
-    'Torombolo': "/torombolo.jpg",
-    'Bodguita': "/bodeguita.jpg",
+    'Local de Ensayo': `${import.meta.env.BASE_URL}localdeensayo.jpg`,
+    'Alborada': `${import.meta.env.BASE_URL}alborada.jpg`,
+    'Torombolo': `${import.meta.env.BASE_URL}torombolo.jpg`,
+    'Bodguita': `${import.meta.env.BASE_URL}bodeguita.jpg`,
 }
 
 function getScores(selectedAnswers: Restaurant[]): Score[] {
